@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
         - name: server
-          image: mezorg/test_app_1_otus:v2-release
+          image: mezorg/test_app_front_1:v3-release
