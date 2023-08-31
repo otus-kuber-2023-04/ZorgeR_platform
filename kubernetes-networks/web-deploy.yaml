@@ -16,23 +16,24 @@ spec:
     metadata:
       labels:
         app: web
-    spec:
-      containers:
+    spec: 
+      containers: 
       - name: web
-        image: voitenkov/k8s-intro-web:0.0.1
+        image: lovyaginmihail/otus_nginx_images:0.0.2
+        readinessProbe:
+          httpGet: 
+            path: /index.html
+            port: 8000
         livenessProbe:
-          tcpSocket: 
-            port: 8000
-        readinessProbe: # Добавим проверку готовности
-          httpGet: # веб-сервера отдавать
-            path: /index.html # контент
-            port: 8000
+          tcpSocket: { port: 8000 }
+
         volumeMounts:
         - name: app
           mountPath: /app
+
       initContainers:
-      - name: init-web
-        image: busybox:1.28
+      - name: init
+        image: busybox:1.31.0 
         command: ['sh', '-c', 'wget -O- https://tinyurl.com/otus-k8s-intro | sh']
         volumeMounts:
         - name: app
