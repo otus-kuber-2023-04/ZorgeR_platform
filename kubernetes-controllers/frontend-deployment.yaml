@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: mezorg/test_app_front_1:v3-release
+          image: ujhgj/hipster-frontend:v0.0.2
           env:
             - name: PORT
               value: "8080"
