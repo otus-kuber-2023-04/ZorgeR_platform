@@ -1,16 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: coredns-svc-udp-lb
+  name: kube-dns-svc-tcp
   namespace: kube-system
   annotations:
-    metallb.universe.tf/allow-shared-ip: "shared-172.17.255.2"
+    metallb.universe.tf/allow-shared-ip: "kube-dns-svc-ip"
 spec:
-  selector:
-    k8s-app: kube-dns
   type: LoadBalancer
   loadBalancerIP: 172.17.255.2
   ports:
-    - protocol: UDP
+    - name: dnstcp
+      protocol: TCP
       port: 53
       targetPort: 53
+  selector:
+    k8s-app: kube-dns

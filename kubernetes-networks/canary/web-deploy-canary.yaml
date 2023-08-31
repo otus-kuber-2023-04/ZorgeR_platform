@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web
+  name: canary
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: web
+      app: canary
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -15,11 +15,11 @@ spec:
   template:
     metadata:
       labels:
-        app: web
+        app: canary
     spec:
       containers:
-      - name: web
-        image: voitenkov/k8s-intro-web:0.0.1
+      - name: canary
+        image: voitenkov/k8s-intro-web:canary
         livenessProbe:
           tcpSocket: 
             port: 8000
